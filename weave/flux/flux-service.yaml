@@ -17,11 +17,14 @@ metadata:
     weave-flux-component: agent
   namespace: weave
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 3030
+  - protocol: TCP
+    port: 3030
+    targetPort: 3030
+  externalTrafficPolicy: Cluster
+  sessionAffinity: None
   selector:
-    name: weave-flux-agent
     app: weave-flux
+    name: weave-flux-agent
     weave-flux-component: agent

@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: weave-flux-memcached
+  labels:
+    name: weave-flux-memcached
+    app: weave-flux
+    weave-flux-component: memcached
+  namespace: weave
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io.scrape: 'false'
+      labels:
+        name: weave-flux-memcached
+        app: weave-flux
+        weave-flux-component: memcached
+    spec:
+      containers:
+        - name: memcached
+          args:
+            - '-m 64'
+            - '-p 11211'
+          image: 'memcached:1.4.39-alpine'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: clients
+              containerPort: 11211

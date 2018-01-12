@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: weave-flux-agent
+  labels:
+    name: weave-flux-agent
+    app: weave-flux
+    weave-flux-component: agent
+  namespace: weave
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: weave-flux-agent
+        app: weave-flux
+        weave-flux-component: agent
+    spec:
+      containers:
+        - name: agent
+          args:
+            - --memcached-hostname=weave-flux-memcached.weave.svc.cluster.local
+            - --git-url=git@github.com:marccarre/flux-playground.git
+            - --git-branch=master
+          image: marccarre/flux:issues-895-improve-logging-bd104b8
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: git-key
+              mountPath: /etc/fluxd/ssh
+      serviceAccountName: weave-flux
+      volumes:
+        - name: git-key
+          secret:
+            secretName: flux-git-deploy

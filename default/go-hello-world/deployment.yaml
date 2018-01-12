@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: go-hello-world
+  labels:
+    name: go-hello-world
+    app: go-hello-world
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        name: go-hello-world
+        app: go-hello-world
+    spec:
+      containers:
+        - name: go-hello-world
+          image: marccarre/go-hello-world:latest
+          imagePullPolicy: IfNotPresent

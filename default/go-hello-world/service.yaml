@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-hello-world
+  labels:
+    name: go-hello-world
+    app: go-hello-world
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  externalTrafficPolicy: Cluster
+  sessionAffinity: None
+  selector:
+    app: go-hello-world
+    name: go-hello-world

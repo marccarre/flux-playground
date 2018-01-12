@@ -25,6 +25,7 @@ spec:
             - --memcached-hostname=weave-flux-memcached.weave.svc.cluster.local
             - --git-url=git@github.com:marccarre/flux-playground.git
             - --git-branch=master
+            - --git-poll-interval=60s
           image: marccarre/flux:issues-895-improve-logging-bd104b8
           imagePullPolicy: IfNotPresent
           volumeMounts:

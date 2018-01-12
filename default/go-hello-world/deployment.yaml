@@ -21,5 +21,7 @@ spec:
     spec:
       containers:
         - name: go-hello-world
-          image: marccarre/go-hello-world:latest
+          image: marccarre/go-hello-world:1
           imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+        - name: dockerhub-secret

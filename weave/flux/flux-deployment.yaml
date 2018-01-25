@@ -26,7 +26,7 @@ spec:
             - --git-url=git@github.com:marccarre/flux-playground.git
             - --git-branch=master
             - --git-poll-interval=60s
-          image: marccarre/flux:issues-895-improve-logging-22ec6b3
+          image: marccarre/flux:issues-895-improve-logging-af735f9
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: git-key
